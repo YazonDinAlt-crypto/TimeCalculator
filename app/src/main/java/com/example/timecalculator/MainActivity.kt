@@ -1,13 +1,15 @@
 package com.example.timecalculator
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
-
+import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,10 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         editText1 = findViewById(R.id.editText1)
         editText2 = findViewById(R.id.editText2)
         resultTextView = findViewById(R.id.textView3)
-
 
         findViewById<Button>(R.id.buttonPlus).setOnClickListener { onButtonClickPlus() }
         findViewById<Button>(R.id.buttonMinus).setOnClickListener { onButtonClickMinus() }
@@ -33,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         val time2 = editText2.text.toString()
 
         val totalSeconds = convertToSeconds(time1) + convertToSeconds(time2)
-        resultTextView.text = convertToTimeFormat(totalSeconds)
+        val result = convertToTimeFormat(totalSeconds)
+        resultTextView.text = result
+
+        Toast.makeText(this, "Результат: $result", Toast.LENGTH_SHORT).show()
     }
 
     private fun onButtonClickMinus() {
@@ -41,7 +48,10 @@ class MainActivity : AppCompatActivity() {
         val time2 = editText2.text.toString()
 
         val totalSeconds = convertToSeconds(time1) - convertToSeconds(time2)
-        resultTextView.text = convertToTimeFormat(totalSeconds)
+        val result = convertToTimeFormat(totalSeconds)
+        resultTextView.text = result
+
+        Toast.makeText(this, "Результат: $result", Toast.LENGTH_SHORT).show()
     }
 
     private fun convertToSeconds(time: String): Int {
@@ -73,6 +83,44 @@ class MainActivity : AppCompatActivity() {
             if (minutes > 0) append("${minutes}m ")
             if (secs > 0) append("${secs}s")
         }.toString().trim().ifEmpty { "0s" }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_clear -> {
+                clearFields()
+                true
+            }
+            R.id.action_exit -> {
+                exitApp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun clearFields() {
+        editText1.text.clear()
+        editText2.text.clear()
+        resultTextView.text = "Результат"
+        resultTextView.setTextColor(0xFF000000.toInt())
+
+        Toast.makeText(this, "Данные очищены", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun exitApp() {
+        finish()
+        Toast.makeText(this, "Выход из приложения", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this, "Приложение закрыто", Toast.LENGTH_SHORT).show()
     }
 
     fun onButtonClickPlus(view: View) {}

@@ -3,27 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E90FF"
-    android:paddingTop="40dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textTV"
-        android:layout_width="250dp"
-        android:layout_height="25dp"
-        android:gravity="center"
-        android:text="  Калькулятор времени  "
-        android:textColor="#fdfdfd"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText,MissingConstraints,SpUsage,TextSizeCheck"
-        tools:layout_editor_absoluteY="60dp" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#006400"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="Калькулятор времени"
+        app:titleTextColor="@android:color/white"
+        app:subtitle="Подсчет времени"
+        app:subtitleTextColor="@android:color/white"
+        app:logo="@drawable/timecalculate"
+        app:logoDescription="Логотип"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editText1"
@@ -35,9 +32,9 @@
         android:hint="Время1##h##m##s"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#fdfdfd"
+        android:textColor="#000000"
         android:textColorHint="#424242"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/guidelineVertical"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,13 +50,26 @@
         android:hint="Время2##h##m##s"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#fdfdfd"
+        android:textColor="#000000"
         android:textColorHint="#424242"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="Autofill,HardcodedText,SpUsage,TextSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="25dp"
+        android:background="#FF000000"
+        android:src="@android:drawable/ic_menu_more"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/black"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <Button
         android:id="@+id/buttonPlus"
@@ -71,10 +81,10 @@
         android:text="  +  "
         android:textSize="28sp"
         android:textColor="#fdfdfd"
-        android:background="#1E90FF"
+        android:background="#008000"
         app:layout_constraintEnd_toEndOf="@+id/guidelineVertical"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateIds,HardcodedText" />
+        tools:ignore="DuplicateIds,HardcodedText,OnClick" />
 
     <Button
         android:id="@+id/buttonMinus"
@@ -86,10 +96,10 @@
         android:text="  -  "
         android:textSize="28sp"
         android:textColor="#fdfdfd"
-        android:background="#1E90FF"
+        android:background="#008000"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,OnClick" />
 
     <TextView
         android:id="@+id/textView3"
@@ -99,8 +109,8 @@
         android:gravity="center"
         android:text="Результат"
         android:textAlignment="center"
-        android:textColor="#FAFAFA"
-        android:textSize="28dp"
+        android:textColor="#8B0000"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
